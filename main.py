@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from pathlib import Path
 import json
 import subprocess
 import sys
@@ -9,9 +10,11 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 def generate_hydra_urls(maintainer_name: str) -> dict[str, str]:
+    arg0_dirname = Path(sys.argv[0]).resolve().parent
+    maintained_derivations_with_hydra_urls = "{}/maintained-derivations-with-hydra-urls.nix".format(arg0_dirname)
     generate_hydra_urls_cmd_args = [
         "nix-build",
-        "./maintained-derivations-with-hydra-urls.nix",
+        maintained_derivations_with_hydra_urls,
         "--no-out-link",
         "--argstr",
         "maintainer",
