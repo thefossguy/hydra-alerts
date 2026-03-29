@@ -17,4 +17,6 @@ pkgs.stdenvNoCC.mkDerivation {
     install -Dm777 main.py $out/bin/main.py
     install -Dm444 maintained-derivations-with-hydra-urls.nix $out/bin/maintained-derivations-with-hydra-urls.nix
   '';
+
+  meta.mainProgram = "main.py";
 }
